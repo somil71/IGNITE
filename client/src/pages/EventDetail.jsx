@@ -87,7 +87,7 @@ export default function EventDetail() {
             </div>
             <div className="flex items-center gap-2 font-mono text-xs text-secondary uppercase tracking-[1px]">
               <DollarSign size={14} className="text-fire" />
-              FEE: ₹{event.registrationFee}
+              FEE: {event.registrationFee === 0 ? 'FREE' : `₹${event.registrationFee} ${event.feeType === 'per_team' ? '/ Team' : '/ Person'}`}
             </div>
             
             {event.maxParticipants && event.registrationCount >= event.maxParticipants ? (
@@ -139,7 +139,7 @@ export default function EventDetail() {
               <h2 className="font-display text-3xl text-primary tracking-widest mb-10 flex items-center gap-3">
                 <span className="w-8 h-[1px] bg-fire" /> RULES & GUIDELINES
               </h2>
-              <div ref={rulesRef} className="space-y-6 reveal-stagger">
+              <div className="space-y-6">
                 {displayRules.length > 0 ? displayRules.map((rule, i) => (
                   <div key={i} className="flex gap-6 group">
                     <div className="font-display text-4xl text-muted group-hover:text-fire transition-colors pt-1">
@@ -150,9 +150,7 @@ export default function EventDetail() {
                     </div>
                   </div>
                 )) : (
-                  <div className="font-mono text-secondary text-sm md:text-base leading-relaxed">
-                    Guidelines will be announced soon.
-                  </div>
+                  <p className="font-mono text-muted uppercase tracking-widest">General techfest guidelines apply. Detail-specific rules will be shared on the official WhatsApp group.</p>
                 )}
               </div>
             </section>
@@ -213,7 +211,13 @@ export default function EventDetail() {
                       {event.facultyCoordinators.map((c, i) => (
                         <div key={i} className="bg-elevated p-3 border border-[var(--border-subtle)]">
                           <div className="font-ui text-sm text-primary font-600">{c.name}</div>
-                          {c.contact && <div className="font-mono text-[10px] text-secondary mt-1">{c.contact}</div>}
+                          {c.contact && c.contact !== 'TBA' ? (
+                            <a href={`tel:${c.contact}`} className="font-mono text-[10px] text-cyan hover:text-fire transition-colors mt-1 block">
+                              {c.contact}
+                            </a>
+                          ) : c.contact === 'TBA' ? (
+                            <div className="font-mono text-[10px] text-muted mt-1">CONTACT TBA</div>
+                          ) : null}
                         </div>
                       ))}
                     </div>
@@ -227,7 +231,13 @@ export default function EventDetail() {
                       {event.studentCoordinators.map((c, i) => (
                         <div key={i} className="bg-elevated p-3 border border-[var(--border-subtle)]">
                           <div className="font-ui text-sm text-primary font-600">{c.name}</div>
-                          {c.contact && <div className="font-mono text-[10px] text-secondary mt-1">{c.contact}</div>}
+                          {c.contact && c.contact !== 'TBA' ? (
+                            <a href={`tel:${c.contact}`} className="font-mono text-[10px] text-cyan hover:text-fire transition-colors mt-1 block">
+                              {c.contact}
+                            </a>
+                          ) : c.contact === 'TBA' ? (
+                            <div className="font-mono text-[10px] text-muted mt-1">CONTACT TBA</div>
+                          ) : null}
                         </div>
                       ))}
                     </div>

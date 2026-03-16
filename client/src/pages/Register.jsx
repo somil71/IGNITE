@@ -223,7 +223,7 @@ export default function Register() {
                         </div>
                         <div className="flex flex-wrap gap-2 shrink-0">
                           <div className="px-3 py-1 bg-fire/10 border border-fire/20 text-fire font-mono text-[10px] flex items-center gap-2">
-                             FEE: ₹{formData.selectedEvent.registrationFee}
+                             FEE: {formData.selectedEvent.registrationFee === 0 ? 'FREE' : `₹${formData.selectedEvent.registrationFee} / ${formData.selectedEvent.feeType === 'per_team' ? 'Team' : 'Person'}`}
                           </div>
                           <div className="px-3 py-1 bg-white/5 border border-white/10 text-secondary font-mono text-[10px] flex items-center gap-2 uppercase">
                              {formData.selectedEvent.teamSize.label}
@@ -310,7 +310,13 @@ export default function Register() {
 
               {step === 4 && (
                 <PaymentUpload 
-                  fee={formData.selectedEvent?.registrationFee || 0} 
+                  fee={
+                    formData.selectedEvent?.registrationFee === 0
+                      ? 0
+                      : formData.selectedEvent?.feeType === 'per_team'
+                      ? formData.selectedEvent.registrationFee
+                      : (formData.selectedEvent?.registrationFee || 0) * (formData.teamMembers.length + 1)
+                  } 
                   formData={formData} 
                   setFormData={setFormData}
                   paymentTimestamp={formData.paymentTimestamp}

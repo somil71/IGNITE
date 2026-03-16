@@ -131,6 +131,7 @@ export default function AdminRegistrations() {
               <th>PARTICIPANT</th>
               <th>EVENT</th>
               <th>COLLEGE</th>
+              <th>FEE</th>
               <th>STATUS</th>
               <th className="text-right">ACTIONS</th>
             </tr>
@@ -150,6 +151,15 @@ export default function AdminRegistrations() {
                   </td>
                   <td>{reg.eventId?.title || 'DELETED EVENT'}</td>
                   <td className="text-secondary italic">{reg.participantDetails?.college || 'N/A'}</td>
+                  <td>
+                    {(() => {
+                      if (!reg.eventId?.registrationFee) return <span className="text-green text-xs font-bold font-mono">FREE</span>;
+                      const fee = reg.eventId.registrationFee;
+                      const type = reg.eventId.feeType;
+                      const total = type === 'per_team' ? fee : fee * ((reg.teamMembers?.length || 0) + 1);
+                      return <span className="text-fire font-mono font-bold text-xs">₹{total}</span>;
+                    })()}
+                  </td>
                   <td>
                     <span className={`px-2 py-1 text-[9px] font-bold border ${
                       reg.status === 'confirmed' ? 'border-green text-green' : 

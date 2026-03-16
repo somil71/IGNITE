@@ -44,14 +44,23 @@ export default function PaymentUpload({ fee, formData, setFormData, paymentTimes
     setUploadProgress(0);
     setUploadError(null);
 
-    // 2. Sanitize Path
+    // 2. Sanitize Path & Validate User
+    if (!clerkUser?.id) {
+      toast.error('Authentication required for upload.');
+      setUploading(false);
+      return;
+    }
+
     const timestamp = Date.now();
     const sanitizedName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9.-]/g, '');
-    const storagePath = `payment-proofs/${clerkUser?.id || 'anonymous'}/${timestamp}-${sanitizedName}`;
+    const storagePath = `payment-proofs/${clerkUser.id}/${timestamp}-${sanitizedName}`;
 
     try {
-      // 3. Resumable Upload
+      // 3. Resumable Upload with Progress Watchdog
+      console.log('Initiating Firebase Upload to:', storagePath);
+      
       const downloadURL = await uploadToFirebaseStorage(file, storagePath, (progress) => {
+        console.log(`Upload Progress: ${progress}%`);
         setUploadProgress(progress);
       });
 
@@ -62,11 +71,11 @@ export default function PaymentUpload({ fee, formData, setFormData, paymentTimes
       toast.success('Payment proof uploaded successfully!');
     } catch (err) {
       // 5. Error Handling
-      console.error('Firebase Upload Error:', err);
-      setUploadError(err.message);
+      console.error('CRITICAL UPLOAD ERROR:', err);
+      setUploadError(err.message || 'Upload failed due to connection issues');
       setUploading(false);
       setUploadProgress(0);
-      toast.error(`Upload Failed: ${err.message}`);
+      toast.error(`Upload Failed: ${err.message || 'Check your connection'}`);
     }
   };
 

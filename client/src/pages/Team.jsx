@@ -9,18 +9,20 @@ import {
 } from 'lucide-react';
 
 const techfestInCharge = [
-  { name: "Prof. (Dr.) A K Jain", role: "Dean of Student Welfare" },
-  { name: "Mr. Arpit Varshney", role: "Faculty In-Charge" },
-  { name: "Dr. Rajeev Kumar", role: "Faculty Coordinator" },
-  { name: "Ms. Heena Khera", role: "Faculty Coordinator" },
+  { name: "Prof. (Dr.) A K Jain", role: "Dean Students Welfare" },
+  { name: "Mr. Arpit Varshney", role: "Faculty Technical Secretary" },
+  { name: "Dr. Navneet Singh", role: "Faculty Convener" },
+  { name: "Ms. Heena Khera", role: "Faculty Co-Convener" },
+  { name: "Mr. Rajeev Kumar", role: "Faculty Coordinator" },
   { name: "Ms. Aina Mehta", role: "Faculty Coordinator" },
-  { name: "Dr. Navneet Singh", role: "Faculty Coordinator" },
-  { name: "Mr. Paras Yadav", role: "Faculty Coordinator" }
+  { name: "Mr. Paras Yadav", role: "Faculty Coordinator" },
 ];
 
 const studentOrganisers = [
-  { name: "Ayush Arnav", role: "Student Organiser" },
-  { name: "Anamika Pandey", role: "Student Organiser" }
+  { name: "Ayush Arnav", role: "Student General Secretary" },
+  { name: "Anamika Pandey", role: "Student Joint Secretary" },
+  { name: "Mayank Bhardwaj", role: "Student Technical Head" },
+  { name: "Yashasvi Singh", role: "Student Creative Head" },
 ];
 
 const teams = [

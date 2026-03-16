@@ -4,7 +4,7 @@ import CategoryBadge from './CategoryBadge';
 import ScrambleText from './ScrambleText';
 
 export default function EventCard({ event }) {
-  const { title, slug, category, teamSize, registrationFee, description } = event;
+  const { title, slug, category, teamSize, registrationFee, description, feeType } = event;
 
   return (
     <Link to={`/events/${slug}`} className="block ignite-card p-6 group cursor-none">
@@ -12,7 +12,7 @@ export default function EventCard({ event }) {
         <CategoryBadge category={category} />
         <div className="flex items-center gap-1 text-[11px] font-mono text-muted">
           <DollarSign size={11} />
-          ₹{registrationFee}
+          {registrationFee === 0 ? 'FREE' : `₹${registrationFee} ${feeType === 'per_team' ? '/ Team' : '/ Person'}`}
         </div>
       </div>
 

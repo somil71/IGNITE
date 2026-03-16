@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const coordinatorSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  contact: { type: String, default: '' },
+  contact: { type: String, default: 'TBA' },
 }, { _id: false });
 
 const eventSchema = new mongoose.Schema({
@@ -22,6 +22,11 @@ const eventSchema = new mongoose.Schema({
     label: { type: String },
   },
   registrationFee: { type: Number, default: 0 },
+  feeType: {
+    type: String,
+    enum: ['per_person', 'per_team'],
+    default: 'per_person'
+  },
   maxParticipants: { type: Number, default: null }, // null = unlimited
   registrationDeadline: { type: Date, default: null },
   prize: {

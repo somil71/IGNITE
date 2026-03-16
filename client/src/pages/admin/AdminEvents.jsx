@@ -44,6 +44,7 @@ export default function AdminEvents() {
     setEditForm({
       title: event.title || '',
       registrationFee: event.registrationFee ?? 0,
+      feeType: event.feeType || 'per_person',
       description: event.description || '',
       whatsappGroupLink: event.whatsappGroupLink || '',
       maxParticipants: event.maxParticipants || '',
@@ -160,7 +161,7 @@ export default function AdminEvents() {
                   </td>
                   <td>{event.teamSize?.label || 'SOLO/TEAM'}</td>
                   <td className={event.registrationFee === 0 ? 'text-green' : 'text-fire font-bold'}>
-                    {event.registrationFee === 0 ? 'FREE' : `₹${event.registrationFee}`}
+                    {event.registrationFee === 0 ? 'FREE' : <div className="leading-tight">₹{event.registrationFee}<br/><span className="text-[8px] text-muted">{event.feeType === 'per_team' ? 'PER TEAM' : 'PER PERSON'}</span></div>}
                   </td>
                   <td>
                     <div className="flex items-center gap-2">
@@ -232,15 +233,25 @@ export default function AdminEvents() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className={labelClasses}>Registration Fee (₹)</label>
-                  <div className="relative">
-                    <DollarSign size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-fire mt-0.5" />
-                    <input 
-                      type="number" 
-                      min="0"
-                      value={editForm.registrationFee}
-                      onChange={e => setEditForm({ ...editForm, registrationFee: e.target.value })}
-                      className={`${inputClasses} pl-10 text-fire font-bold text-lg`}
-                    />
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <DollarSign size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-fire mt-0.5" />
+                      <input 
+                        type="number" 
+                        min="0"
+                        value={editForm.registrationFee}
+                        onChange={e => setEditForm({ ...editForm, registrationFee: e.target.value })}
+                        className={`${inputClasses} pl-10 text-fire font-bold text-lg`}
+                      />
+                    </div>
+                    <select 
+                      value={editForm.feeType}
+                      onChange={e => setEditForm({ ...editForm, feeType: e.target.value })}
+                      className={`${inputClasses} flex-1`}
+                    >
+                      <option value="per_person">Per Person</option>
+                      <option value="per_team">Per Team</option>
+                    </select>
                   </div>
                 </div>
                 <div>
