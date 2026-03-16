@@ -23,7 +23,7 @@ export default function Leaderboard() {
     if (events.length > 0 && !selectedSlug) {
       setSelectedSlug(events[0].slug);
     }
-  }, [events]);
+  }, [events, selectedSlug]);
 
   return (
     <PageTransition className="min-h-screen bg-void pt-[120px] pb-24 relative overflow-hidden">

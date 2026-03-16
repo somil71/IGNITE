@@ -5,7 +5,7 @@ export async function getMessagingInstance() {
   
   // Dynamic import — only loaded in browser, never during SSR/build
   const { getMessaging } = await import('firebase/messaging');
-  const { app } = await import('./config');
+  const { default: app } = await import('./config');
   
   messagingInstance = getMessaging(app);
   return messagingInstance;

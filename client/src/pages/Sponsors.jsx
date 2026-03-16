@@ -4,7 +4,6 @@ import IgniteButton from '../components/ui/IgniteButton';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function Sponsors() {
-  const reveal1 = useScrollReveal();
   const reveal2 = useScrollReveal();
 
   const tiers = [

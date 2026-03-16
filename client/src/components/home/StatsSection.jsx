@@ -13,8 +13,6 @@ function Counter({ value, suffix = '' }) {
           hasStarted.current = true;
           let start = 0;
           const end = parseInt(value);
-          const duration = 2000;
-          const stepTime = Math.abs(Math.floor(duration / end));
           
           const timer = setInterval(() => {
             start += Math.ceil(end / 100);

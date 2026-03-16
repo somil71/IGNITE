@@ -31,7 +31,7 @@ export default function NotFound() {
             PAGE NOT FOUND
           </h2>
           <p className="font-mono text-secondary tracking-[2px] mb-12 uppercase text-xs md:text-sm max-w-md mx-auto leading-relaxed">
-            The page you're looking for has been purged or never existed in this sector.
+            The page you&apos;re looking for has been purged or never existed in this sector.
           </p>
           <IgniteButton variant="primary" to="/">
             ← BACK TO HOME BASE

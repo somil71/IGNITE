@@ -66,9 +66,6 @@ export default function AdminEvents() {
   };
 
   const filteredEvents = events.filter(e => {
-    const matchesFilter = filter === 'ALL' || 
-                          filter === 'INACTIVE' ? !e.isActive :
-                          filter === 'ALL' || e.category.toUpperCase() === filter.toUpperCase();
     const matchesSearch = e.title.toLowerCase().includes(search.toLowerCase());
     return matchesSearch && (
       filter === 'ALL' ? true :

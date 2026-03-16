@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { onForegroundMessage } from '../firebase-setup/messaging';
 import toast from 'react-hot-toast';
 
@@ -32,5 +32,3 @@ export function NotificationProvider({ children }) {
     </NotificationContext.Provider>
   );
 }
-
-export const useNotifications = () => useContext(NotificationContext);

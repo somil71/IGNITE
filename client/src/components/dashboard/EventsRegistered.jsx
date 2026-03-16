@@ -11,6 +11,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../../hooks/useAuth';
 import { paymentService } from '@/services/payment.service';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useUser } from '@clerk/react';
 
 /**
  * PHASE 3D: EventsRegistered — Context-Aware Updates
@@ -18,6 +19,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
  */
 export default function EventsRegistered({ registrations }) {
   const { user } = useAuth();
+  const { user: clerkUser } = useUser();
   const queryClient = useQueryClient();
   const [uploadingId, setUploadingId] = useState(null);
   const [progressData, setProgressData] = useState({});
@@ -38,7 +40,8 @@ export default function EventsRegistered({ registrations }) {
     if (!file) return;
 
     setUploadingId(reg.payment._id);
-    const storageRef = ref(storage, `payment-proofs/${user.uid}/reupload_${Date.now()}_${file.name}`);
+    const uploaderId = clerkUser?.id || user?._id || user?.email || 'unknown-user';
+    const storageRef = ref(storage, `payment-proofs/${uploaderId}/reupload_${Date.now()}_${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on('state_changed', 

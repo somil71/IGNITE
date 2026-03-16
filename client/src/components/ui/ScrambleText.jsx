@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
 
@@ -7,7 +7,7 @@ export default function ScrambleText({ text, className = '', trigger = 'mount', 
   const elementRef = useRef(null);
   const hasAnimated = useRef(false);
 
-  const scramble = () => {
+  const scramble = useCallback(() => {
     if (hasAnimated.current) return;
     hasAnimated.current = true;
     let iteration = 0;
@@ -22,12 +22,12 @@ export default function ScrambleText({ text, className = '', trigger = 'mount', 
       if (iteration >= text.length) clearInterval(interval);
       iteration += 0.4;
     }, 35);
-  };
+  }, [text]);
 
   useEffect(() => {
     if (trigger === 'mount') {
-      setTimeout(scramble, delay);
-      return;
+      const t = setTimeout(scramble, delay);
+      return () => clearTimeout(t);
     }
 
     const observer = new IntersectionObserver(
@@ -37,7 +37,7 @@ export default function ScrambleText({ text, className = '', trigger = 'mount', 
 
     if (elementRef.current) observer.observe(elementRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [delay, scramble, trigger]);
 
   return (
     <span ref={elementRef} className={`scramble-text ${className}`}>

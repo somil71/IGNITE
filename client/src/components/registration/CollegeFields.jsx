@@ -1,11 +1,9 @@
 import { useDropzone } from 'react-dropzone';
-import { Upload, CircleCheck, Loader2 } from 'lucide-react';
+import { Upload, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import api from '../../services/api';
-import { useAuth } from '../../hooks/useAuth';
 
 export default function CollegeFields({ formData, setFormData }) {
-  const { user } = useAuth();
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
 

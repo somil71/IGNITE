@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-
-export default function RegistrationForm({ step, setStep, formData, setFormData, onNext, onBack }) {
+export default function RegistrationForm({ step, formData, setFormData }) {
   const handleInput = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));

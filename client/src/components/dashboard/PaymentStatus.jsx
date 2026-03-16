@@ -1,4 +1,4 @@
-import { ShieldCheck, Clock, CircleX, CircleCheck } from 'lucide-react';
+import { Clock, CircleX, CircleCheck } from 'lucide-react';
 
 export default function PaymentStatus({ status, payment }) {
   const getStatusConfig = () => {
@@ -14,7 +14,7 @@ export default function PaymentStatus({ status, payment }) {
       icon: <CircleX size={12} />,
       bg: 'bg-fire/10'
     };
-    if (!payment || !payment.paymentProof) return {
+    if (!payment || !payment.paymentProofUrl) return {
       label: 'FREE EVENT / NO PAYMENT',
       color: 'text-cyan',
       icon: <CircleCheck size={12} />,

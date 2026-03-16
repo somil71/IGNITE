@@ -15,7 +15,6 @@ export default function EventDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const aboutRef = useScrollReveal();
-  const rulesRef = useScrollReveal();
   const coordRef = useScrollReveal();
   const { isSignedIn } = useUser();
   const { openSignIn } = useClerk();

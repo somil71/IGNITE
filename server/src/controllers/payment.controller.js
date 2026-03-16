@@ -11,7 +11,7 @@ exports.uploadPaymentProof = async (req, res, next) => {
     const payment = await Payment.findOneAndUpdate(
       { registrationId },
       {
-        paymentProof: paymentProofUrl,
+        paymentProofUrl,
         transactionId,
         paymentStatus: 'uploaded',
       },
@@ -39,7 +39,7 @@ exports.reuploadPayment = async (req, res, next) => {
 
     const payment = await Payment.findOneAndUpdate(
       { _id: req.params.id, userId: req.user._id, paymentStatus: 'rejected' },
-      { paymentProof: paymentProofUrl, transactionId, paymentStatus: 'uploaded' },
+      { paymentProofUrl, transactionId, paymentStatus: 'uploaded' },
       { new: true }
     );
 

@@ -16,7 +16,7 @@ export const adminService = {
   
   // Payments
   getPayments: (params) => api.get('/admin/payments', { params }),
-  verifyPayment: (id, status, note) => api.put(`/admin/payments/${id}`, { paymentStatus: status, note }),
+  verifyPayment: (id, status, rejectionReason) => api.put(`/admin/payments/${id}`, { status, rejectionReason }),
   overridePayment: (id, note) => api.patch(`/admin/payments/${id}/override`, { note }),
   
   // Leaderboard
