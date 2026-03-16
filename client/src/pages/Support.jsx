@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PageTransition from '../components/layout/PageTransition';
 import { Mail, MapPin, Users, MessageSquare, Send, Loader2, CheckCircle2 } from 'lucide-react';
-import { db } from '../firebase/config';
+import { db } from '../firebase-setup/config';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 

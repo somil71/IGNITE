@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useUser } from '@clerk/react';
-import { requestNotificationPermission, onForegroundMessage } from '../firebase/messaging';
+import { requestNotificationPermission, onForegroundMessage } from '../firebase-setup/messaging';
 import api from '@/services/api';
 import toast from 'react-hot-toast';
 

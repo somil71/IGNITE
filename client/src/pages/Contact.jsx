@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase/config';
+import { db } from '../firebase-setup/config';
 import PageTransition from '../components/layout/PageTransition';
 import ScrambleText from '../components/ui/ScrambleText';
 

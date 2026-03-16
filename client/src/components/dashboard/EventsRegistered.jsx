@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { storage } from '../../firebase/config';
+import { storage } from '../../firebase-setup/config';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../../hooks/useAuth';
 import { paymentService } from '@/services/payment.service';

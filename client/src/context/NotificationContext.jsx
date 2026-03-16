@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { onForegroundMessage } from '../firebase/messaging';
+import { onForegroundMessage } from '../firebase-setup/messaging';
 import toast from 'react-hot-toast';
 
 const NotificationContext = createContext(null);
