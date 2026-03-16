@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, CircleCheck, AlertCircle, Loader2 } from 'lucide-react';
+import { Upload, CircleCheck, AlertCircle } from 'lucide-react';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
 
@@ -15,7 +15,48 @@ export default function PaymentUpload({ fee, formData, setFormData, paymentTimes
   const showFeeWarning = !rawFee || rawFee === 0;
 
   const handleFileUpload = async (e) => {
-    // ... logic remains same ...
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validation
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('File size exceeds 5MB limit');
+      return;
+    }
+
+    const formDataToUpload = new FormData();
+    formDataToUpload.append('file', file);
+
+    setUploading(true);
+    setUploadError(null);
+    setUploadProgress(10);
+
+    try {
+      const response = await api.post('/upload/payment-proof', formDataToUpload, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent) => {
+          const percent = Math.round((progressEvent.loaded * 90) / progressEvent.total) + 10;
+          setUploadProgress(percent);
+        }
+      });
+
+      if (response.data.success) {
+        setFormData(prev => ({ 
+          ...prev, 
+          paymentScreenshot: response.data.url,
+          paymentPublicId: response.data.publicId 
+        }));
+        setUploadedFileName(file.name);
+        toast.success('Payment proof uploaded successfully');
+      }
+    } catch (err) {
+      console.error('[Upload] Error:', err);
+      const msg = err.response?.data?.message || 'Upload failed. Please try again.';
+      setUploadError(msg);
+      toast.error(msg);
+    } finally {
+      setUploading(false);
+    }
   };
 
   const formattedTime = paymentTimestamp 
@@ -46,19 +87,22 @@ export default function PaymentUpload({ fee, formData, setFormData, paymentTimes
           SCAN TO PAY — UPI
         </div>
         
-        <div className="w-[200px] h-[200px] bg-white mx-auto p-3 shadow-2xl flex items-center justify-center">
+        <div className="w-[200px] h-[200px] bg-white mx-auto p-3 shadow-2xl flex items-center justify-center relative overflow-hidden">
           <img 
-            src="/qr-code.png" 
+            src={`/qr.jpeg?v=${Date.now()}`} 
             alt="Payment QR" 
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain relative z-10"
             onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'flex';
+              // Fallback to dynamic UPI QR if local image fails
+              const upiId = 'ignite.techfest@iilm';
+              const amount = fee || 0;
+              const name = 'IGNITE 2026';
+              const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+              e.target.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
             }}
           />
-          <div className="hidden flex-col items-center justify-center text-void gap-1">
-             <div className="font-mono text-[10px] font-bold">QR NOT FOUND</div>
-             <div className="font-mono text-[11px] font-bold">ignite.techfest@iilm</div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-void gap-1 opacity-20 pointer-events-none">
+             <div className="font-mono text-[8px] font-bold">LOADING QR...</div>
           </div>
         </div>
 

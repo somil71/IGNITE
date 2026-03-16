@@ -87,8 +87,8 @@ export default function Footer() {
           <div className="font-mono text-[11px] text-muted">
             © 2026 IGNITE Techfest — IILM University. All rights reserved.
           </div>
-          <div className="font-mono text-[11px] text-muted">
-            Developed by <span className="text-secondary">GDG IILM</span>
+          <div className="font-mono text-[11px] text-muted uppercase tracking-[1px]">
+            Website designed + developed by : - <span className="text-secondary">SOMIL</span>
           </div>
         </div>
       </div>
