@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Linkedin, Zap, Mail } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -8,12 +8,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-fire flex items-center justify-center">
-                <Zap size={16} className="text-white" />
-              </div>
-              <div className="font-display text-3xl text-primary tracking-widest">IGNITE</div>
-            </div>
+            <Link to="/" className="inline-block mb-6 group">
+              <img 
+                src="/logo.jpeg" 
+                alt="IGNITE Logo" 
+                className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
             <p className="font-mono text-[12px] text-secondary leading-relaxed mb-2">
               IILM University, Greater Noida
             </p>

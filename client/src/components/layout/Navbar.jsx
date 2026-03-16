@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Zap, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { SignInButton, SignUpButton, UserButton, useUser } from '@clerk/react';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -59,15 +59,12 @@ export default function Navbar() {
       style={{ paddingTop: '2px' }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-gradient-fire flex items-center justify-center">
-            <Zap size={16} className="text-white" />
-          </div>
-          <div>
-            <div className="font-display text-2xl text-primary leading-none tracking-widest uppercase">IGNITE</div>
-            <div className="font-mono text-[9px] text-secondary tracking-[3px]">TECHFEST 2026</div>
-          </div>
+        <Link to="/" className="flex items-center group">
+          <img 
+            src="/logo.jpeg" 
+            alt="IGNITE Logo" 
+            className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
         </Link>
 
         {/* Desktop Nav */}

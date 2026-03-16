@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Outlet, Navigate, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, Navigate, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { 
   LayoutDashboard, Calendar, ClipboardList, CreditCard, 
@@ -50,10 +50,14 @@ export default function AdminLayout() {
         <div className="h-full flex flex-col">
           {/* Admin Header */}
           <div className="p-8 border-b border-fire/5">
-            <div className="font-display text-2xl text-fire tracking-[4px] flex items-center gap-3">
-              <span className="text-primary opacity-50">◈</span> IGNITE
-            </div>
-            <div className="text-[9px] text-muted tracking-[3px] uppercase mt-2">Central Admin Octagon</div>
+            <Link to="/admin" className="flex items-center gap-3 group">
+              <img 
+                src="/logo.jpeg" 
+                alt="IGNITE Logo" 
+                className="h-8 w-auto object-contain"
+              />
+            </Link>
+            <div className="text-[9px] text-muted tracking-[3px] uppercase mt-4">Central Admin Octagon</div>
           </div>
 
           {/* Navigation */}

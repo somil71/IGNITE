@@ -113,7 +113,7 @@ export default function PaymentUpload({ fee, formData, setFormData, paymentTimes
           <div className="font-ui text-[9px] text-muted tracking-[3px] uppercase mb-4">Scan to Pay — UPI</div>
           <div className="w-48 h-48 bg-white p-3 shadow-2xl mb-4 group overflow-hidden relative">
             <img 
-              src="/qr-code.png" 
+              src="/qr.jpeg" 
               alt="UPI QR Code" 
               className="w-full h-full object-contain"
               onError={(e) => {
