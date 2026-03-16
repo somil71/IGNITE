@@ -1,24 +1,6 @@
-/*
- * ADDING PHOTOS — Instructions for when photos are ready
- *
- * Step 1: Compress photos to max 200KB using squoosh.app
- * Step 2: Crop to square (1:1 ratio) for best display
- * Step 3: Upload to client/public/team/ folder
- *   Name format: firstname-lastname.jpg
- *   Example: ayush-arnav.jpg, ak-jain.jpg
- * Step 4: Update the photo field from null to the path:
- *   photo: "/team/ayush-arnav.jpg"
- *
- * OR upload to Cloudinary ignite-2026/team/ folder
- * and use the secure_url as the photo value.
- *
- * No other code changes needed. Photos appear automatically.
- */
-
 import PageTransition from '../components/layout/PageTransition';
 import FacultyCard from '../components/team/FacultyCard';
 import TeamSection from '../components/team/TeamSection';
-import useScrollReveal from '../hooks/useScrollReveal';
 import { Star } from 'lucide-react';
 
 const techfestInCharge = [
@@ -52,36 +34,62 @@ const organisingTeams = [
 ];
 
 export default function Team() {
-  const revealHeader = useScrollReveal();
-  const revealFaculty = useScrollReveal();
-  const revealStudents = useScrollReveal();
-  const revealTeams = useScrollReveal();
+  // Removed useScrollReveal hooks as they are no longer used
+  // const revealHeader = useScrollReveal();
+  // const revealFaculty = useScrollReveal();
+  // const revealStudents = useScrollReveal();
+  // const revealTeams = useScrollReveal();
+
+  const gridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+    gap: '12px',
+    width: '100%',
+    boxSizing: 'border-box'
+  };
+
+  const sectionStyle = {
+    marginBottom: '80px',
+    width: '100%',
+    boxSizing: 'border-box'
+  };
 
   return (
-    <PageTransition className="pt-[120px] pb-24 px-6 md:px-12 relative z-10">
-      <div className="max-w-[1400px] mx-auto">
+    <PageTransition 
+      className="relative z-10 pt-[120px] pb-24 px-6 md:px-12"
+      style={{
+        position: 'relative',
+        zIndex: 1,
+        width: '100%'
+      }}
+    >
+      <div style={{ maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
         
         {/* PAGE HEADER */}
-        <header ref={revealHeader} className="mb-20 px-[48px] reveal-element">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-8 h-[1px] bg-[#FF5500]" />
-            <span className="font-mono text-[9px] text-[#FF5500] uppercase tracking-[0.4em]">—— THE PEOPLE BEHIND IGNITE</span>
+        <header style={sectionStyle}> {/* Removed ref={revealHeader} */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+            <span style={{ width: '32px', height: '1px', background: '#FF5500' }} />
+            <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '9px', color: '#FF5500', textTransform: 'uppercase', letterSpacing: '0.4em' }}>
+              —— THE PEOPLE BEHIND IGNITE
+            </span>
           </div>
-          <h1 className="font-display text-[64px] md:text-[min(120px,10vw)] text-white uppercase leading-[0.9] mb-4">
+          <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(64px, 10vw, 120px)', color: '#fff', textTransform: 'uppercase', lineHeight: 0.9, margin: '0 0 16px 0' }}>
             THE TEAM
           </h1>
-          <p className="font-mono text-[12px] text-secondary">
+          <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
             Powering IGNITE 2026 at IILM University
           </p>
         </header>
 
         {/* SECTION 2: TECHFEST IN-CHARGE */}
-        <section className="mb-20 px-[48px] reveal-element">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-10 h-[1px] bg-[#FF5500]" />
-            <h2 className="font-mono text-[9px] text-[#FF5500] uppercase tracking-[0.3em]">TECHFEST IN-CHARGE</h2>
+        <section style={sectionStyle}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+            <span style={{ width: '40px', height: '1px', background: '#FF5500' }} />
+            <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '9px', color: '#FF5500', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0 }}>
+              TECHFEST IN-CHARGE
+            </h2>
           </div>
-          <div ref={revealFaculty} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 reveal-stagger">
+          <div style={gridStyle}> {/* Removed ref={revealFaculty} and className="reveal-stagger" */}
             {techfestInCharge.map((person, idx) => (
               <FacultyCard key={idx} {...person} />
             ))}
@@ -89,20 +97,28 @@ export default function Team() {
         </section>
 
         {/* SECTION 3: STUDENT ORGANISERS */}
-        <section className="mb-20 px-[48px] reveal-element">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-10 h-[1px] bg-[#FF5500]" />
-            <h2 className="font-mono text-[9px] text-[#FF5500] uppercase tracking-[0.3em]">STUDENT ORGANISERS</h2>
+        <section style={sectionStyle}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+            <span style={{ width: '40px', height: '1px', background: '#FF5500' }} />
+            <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '9px', color: '#FF5500', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0 }}>
+              STUDENT ORGANISERS
+            </h2>
           </div>
-          <div ref={revealStudents} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 reveal-stagger">
+          <div style={gridStyle}> {/* Removed ref={revealStudents} and className="reveal-stagger" */}
             {studentOrganisers.map((person, idx) => (
-              <div key={idx} className="relative">
+              <div key={idx} style={{ position: 'relative' }}>
                 <FacultyCard {...person} />
                 {(person.name === "Ayush Arnav" || person.name === "Anamika Pandey") && (
                    <Star 
                      size={10} 
-                     className="absolute bottom-16 right-4 z-30" 
-                     style={{ color: person.accent === 'cyan' ? '#00D4FF' : '#FF5500', fill: person.accent === 'cyan' ? '#00D4FF' : '#FF5500' }} 
+                     style={{ 
+                       position: 'absolute', 
+                       bottom: '64px', 
+                       right: '16px', 
+                       zIndex: 30,
+                       color: person.accent === 'cyan' ? '#00D4FF' : '#FF5500', 
+                       fill: person.accent === 'cyan' ? '#00D4FF' : '#FF5500' 
+                     }} 
                    />
                 )}
               </div>
@@ -111,15 +127,26 @@ export default function Team() {
         </section>
 
         {/* SECTION 4: ORGANISING TEAMS */}
-        <section className="px-[48px] reveal-element">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="w-10 h-[1px] bg-[#FF5500]" />
-            <h2 className="font-mono text-[9px] text-[#FF5500] uppercase tracking-[0.3em]">ORGANISING TEAMS</h2>
+        <section style={{ width: '100%', boxSizing: 'border-box' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+            <span style={{ width: '40px', height: '1px', background: '#FF5500' }} />
+            <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '9px', color: '#FF5500', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0 }}>
+              ORGANISING TEAMS
+            </h2>
           </div>
-          <p className="font-mono text-[11px] text-white/40 mb-6">
+          <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>
             The people making it happen behind the scenes.
           </p>
-          <div ref={revealTeams} className="grid grid-cols-1 sm:grid-cols-2 gap-2 reveal-stagger max-w-[1200px]">
+          <div 
+            style={{ // Removed ref={revealTeams} and className="reveal-stagger"
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+              gap: '8px', 
+              width: '100%', 
+              maxWidth: '1200px',
+              paddingBottom: '20px'
+            }}
+          >
             {organisingTeams.map((team, idx) => (
               <TeamSection key={idx} {...team} />
             ))}
@@ -127,9 +154,6 @@ export default function Team() {
         </section>
 
       </div>
-
     </PageTransition>
-  );
-}
   );
 }

@@ -1,64 +1,90 @@
-import { ChevronRight, Megaphone, ClipboardList, Truck, Share2, ShieldCheck, Palette, Sparkles, Cpu, Lightbulb, Camera } from 'lucide-react';
+import { 
+  Megaphone, ClipboardList, Truck, Share2, 
+  ShieldCheck, Palette, Sparkles, Cpu, 
+  Lightbulb, Camera, ChevronRight 
+} from 'lucide-react';
 
-const ICONS = {
-  Megaphone,
-  ClipboardList,
-  Truck,
-  Share2,
-  ShieldCheck,
-  Palette,
-  Sparkles,
-  Cpu,
-  Lightbulb,
-  Camera
+const ICON_MAP = {
+  Megaphone, ClipboardList, Truck, Share2,
+  ShieldCheck, Palette, Sparkles, Cpu,
+  Lightbulb, Camera
 };
 
 export default function TeamSection({ name, icon, subtitle, color = "#FF5500" }) {
-  const IconComponent = ICONS[icon] || Share2;
+  const IconComponent = ICON_MAP[icon] || Share2;
+
+  // Add opacity to hex color for background and border
+  const getRGBA = (hex, opacity) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  };
 
   return (
-    <div className="group relative flex items-center gap-4 p-[18px] px-5 bg-card border border-white/5 hover:bg-elevated hover:border-[#FF550059] transition-all duration-200 cursor-pointer overflow-hidden">
-      {/* Background shimmer element */}
-      <div 
-        className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 pointer-events-none z-0"
-        style={{ 
-          background: `linear-gradient(105deg, transparent 30%, ${color}0A 50%, transparent 70%)` 
-        }}
-      />
-
-      {/* Icon Block */}
-      <div 
-        className="relative w-11 h-11 flex items-center justify-center shrink-0 border border-white/[0.25] group-hover:bg-opacity-20 transition-colors z-10"
-        style={{ 
-          backgroundColor: `${color}1F`, // 12%
-          borderColor: `${color}40`, // 25%
-          color: color
-        }}
-      >
-        <IconComponent size={20} />
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '16px',
+      padding: '18px 20px',
+      background: '#1A1A28',
+      border: '1px solid rgba(255,255,255,0.08)',
+      cursor: 'pointer',
+      transition: 'all 200ms ease',
+      width: '100%',
+      boxSizing: 'border-box',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      {/* Icon box */}
+      <div style={{
+        width: '44px',
+        height: '44px',
+        flexShrink: 0,
+        background: getRGBA(color, 0.12),
+        border: `1px solid ${getRGBA(color, 0.3)}`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <IconComponent size={20} style={{ color: color }} />
       </div>
 
-      {/* Middle — Text block */}
-      <div className="relative flex-1 min-w-0 z-10">
-        <h4 className="font-ui font-bold text-[15px] text-white tracking-wide uppercase truncate leading-tight">
+      {/* Team name text */}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <h4 style={{
+          fontFamily: "'Rajdhani', sans-serif",
+          fontWeight: 700,
+          fontSize: '15px',
+          color: '#F0F0F5',
+          margin: 0,
+          textTransform: 'uppercase',
+          letterSpacing: '0.02em',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }}>
           {name}
         </h4>
         {subtitle && (
-          <p 
-            className="font-mono text-[9px] uppercase tracking-[0.1em] mt-0.5 truncate"
-            style={{ color: color }}
-          >
+          <p style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '9px',
+            color: color,
+            letterSpacing: '0.1em',
+            margin: '2px 0 0 0',
+            textTransform: 'uppercase',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
+          }}>
             {subtitle}
           </p>
         )}
       </div>
 
-      {/* Right — Chevron */}
-      <ChevronRight 
-        size={14} 
-        className="relative text-white/25 group-hover:translate-x-[3px] transition-all z-10"
-        style={{ color: color }}
-      />
+      {/* Right chevron */}
+      <ChevronRight size={14} style={{ color: color, opacity: 0.25 }} />
     </div>
   );
 }
