@@ -1,8 +1,7 @@
 import { useDropzone } from 'react-dropzone';
 import { Upload, CircleCheck, Loader2 } from 'lucide-react';
 import { useState } from 'react';
-import { storage } from '../../firebase/config';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import api from '../../services/api';
 import { useAuth } from '../../hooks/useAuth';
 
 export default function CollegeFields({ formData, setFormData }) {
@@ -15,23 +14,28 @@ export default function CollegeFields({ formData, setFormData }) {
     if (!file) return;
 
     setUploading(true);
-    const storageRef = ref(storage, `student-ids/${user.uid}/${Date.now()}_${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    setProgress(0);
 
-    uploadTask.on('state_changed', 
-      (snapshot) => {
-        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      }, 
-      (error) => {
-        console.error(error);
-        setUploading(false);
-      }, 
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        setFormData(prev => ({ ...prev, studentIdUrl: downloadURL }));
+    const uploadData = new FormData();
+    uploadData.append('file', file);
+
+    try {
+      const response = await api.post('/upload/student-id', uploadData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent) => {
+          const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setProgress(percent);
+        }
+      });
+      
+      if (response.data.success) {
+        setFormData(prev => ({ ...prev, studentIdUrl: response.data.url }));
         setUploading(false);
       }
-    );
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
@@ -135,8 +139,8 @@ export default function CollegeFields({ formData, setFormData }) {
                     <div className="font-mono text-[10px] text-secondary">UPLOADING... {Math.round(progress)}%</div>
                   </div>
                 ) : formData.studentIdUrl ? (
-                  <div className="flex flex-col items-center gap-2 text-green">
-                    <CircleCheck size={24} />
+                  <div className="flex flex-col items-center gap-3 text-green">
+                    <img src={formData.studentIdUrl} alt="Student ID" className="w-[80px] h-[80px] object-cover border border-green/30" />
                     <div className="font-mono text-[10px] uppercase">ID UPLOADED SUCCESSFULLY</div>
                   </div>
                 ) : (

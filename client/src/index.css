@@ -452,6 +452,14 @@ select option {
 .reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.30s; opacity:1; transform:translateY(0); }
 .reveal-stagger.revealed > *:nth-child(7) { transition-delay: 0.35s; opacity:1; transform:translateY(0); }
 .reveal-stagger.revealed > *:nth-child(8) { transition-delay: 0.40s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(9) { transition-delay: 0.45s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(10) { transition-delay: 0.50s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(11) { transition-delay: 0.55s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(12) { transition-delay: 0.60s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.25s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.30s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(7) { transition-delay: 0.35s; opacity:1; transform:translateY(0); }
+.reveal-stagger.revealed > *:nth-child(8) { transition-delay: 0.40s; opacity:1; transform:translateY(0); }
 .reveal-stagger.revealed > * { opacity: 1; transform: translateY(0); }
 
 /* Slide from left */
@@ -522,7 +530,55 @@ select option {
   .ignite-input, .ignite-select { cursor: text; }
 }
 
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(1); }
-  50%       { opacity: 0.9; transform: scaleY(0.7); }
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.65); }
+}
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+.card-accent-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease;
+}
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00FF88;
+  animation: dotPulse 2s ease-in-out infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.card-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #FF5500;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease;
+}
+.person-card:hover .card-line {
+  transform: scaleX(1);
+}
+
+/* Contact Page Overrides */
+@media (max-width: 1024px) {
+  .contact-grid-main { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 768px) {
+  .contact-hero-section, .contact-grid-main { padding-left: 20px !important; padding-right: 20px !important; }
+  .contact-grid-main { padding-top: 40px !important; }
+  .team-page-header, .team-page-section { padding-left: 0 !important; padding-right: 0 !important; }
 }

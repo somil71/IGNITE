@@ -12,7 +12,7 @@ exports.getLeaderboard = async (req, res, next) => {
         return { event, entries };
       })
     );
-    res.json({ leaderboard: result.filter(r => r.entries.length > 0) });
+    res.json({ leaderboard: result });
   } catch (err) {
     next(err);
   }

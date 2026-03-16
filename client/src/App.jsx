@@ -25,6 +25,7 @@ import Team from './pages/Team';
 import Sponsors from './pages/Sponsors';
 import Support from './pages/Support';
 import Contact from './pages/Contact';
+import Gallery from './pages/Gallery';
 import CompleteProfile from './pages/CompleteProfile';
 import NotFound from './pages/NotFound';
 
@@ -91,6 +92,7 @@ export default function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/sponsors" element={<Sponsors />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/gallery" element={<Gallery />} />
 
               {/* Clerk Auth Pages */}
               <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />

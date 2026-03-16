@@ -1,72 +1,110 @@
-import { Trophy, Medal } from 'lucide-react';
-import useScrollReveal from '../../hooks/useScrollReveal';
+import { useQuery } from '@tanstack/react-query';
+import api from '@/services/api';
+import { Trophy, AlertCircle } from 'lucide-react';
 
-export default function LeaderboardTable({ entries, showEvent }) {
-  const tableRef = useScrollReveal();
-  if (!entries || entries.length === 0) return null;
+export default function LeaderboardTable({ selectedSlug }) {
+  const { data: rankings = [], isLoading } = useQuery({
+    queryKey: ['leaderboard', selectedSlug],
+    queryFn: async () => {
+      if (!selectedSlug) return [];
+      const res = await api.get(`/leaderboard/${selectedSlug}`);
+      return res.data.entries;
+    },
+    enabled: !!selectedSlug
+  });
+
+  if (!selectedSlug) {
+    return (
+      <div className="h-full flex flex-col items-center justify-center text-center opacity-20">
+        <Trophy size={80} strokeWidth={1} />
+        <div className="font-mono text-sm uppercase tracking-[1em] mt-8">WAITING FOR INPUT...</div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4 animate-pulse">
+        <div className="h-12 bg-white/5" />
+        <div className="h-[400px] bg-white/5" />
+      </div>
+    );
+  }
+
+  if (rankings.length === 0) {
+    return (
+       <div className="h-full flex flex-col items-center justify-center p-12 text-center">
+         <div className="p-6 border border-fire/20 bg-fire/5 max-w-md">
+            <AlertCircle size={32} className="text-fire mx-auto mb-4" />
+            <h3 className="font-display text-2xl text-white uppercase mb-4">DATA UNAVAILABLE</h3>
+            <p className="font-mono text-[11px] text-secondary leading-relaxed uppercase">
+              RANKINGS FOR THIS MISSION HAVE NOT BEEN PUBLISHED BY COMMAND. 
+              EXPECT UPDATES DURING LIVE EXECUTION PHASES.
+            </p>
+         </div>
+       </div>
+    );
+  }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-left border-collapse min-w-[600px]">
-        <thead>
-          <tr className="border-b border-white/5">
-            <th className="py-6 px-8 font-ui text-[10px] text-muted tracking-[3px] uppercase">Rank</th>
-            <th className="py-6 px-8 font-ui text-[10px] text-muted tracking-[3px] uppercase">Subject / Team</th>
-            {showEvent && <th className="py-6 px-8 font-ui text-[10px] text-muted tracking-[3px] uppercase">Event</th>}
-            <th className="py-6 px-8 font-ui text-[10px] text-muted tracking-[3px] uppercase">Origin / College</th>
-            <th className="py-6 px-8 font-ui text-[10px] text-muted tracking-[3px] uppercase text-right">Score</th>
-          </tr>
-        </thead>
-        <tbody ref={tableRef} className="font-mono text-sm tracking-[1px] reveal-stagger">
-          {entries.map((entry, i) => {
-            const rank = i + 1;
-            const isTop3 = rank <= 3;
-            
-            return (
-              <tr 
-                key={entry._id || i}
-                className={`border-b border-white/[0.03] hover:bg-fire/[0.03] transition-colors group ${
-                  rank === 1 ? 'bg-fire/[0.02]' : ''
-                }`}
-              >
-                <td className="py-5 px-8">
-                  <div className="flex items-center gap-3">
-                    {rank === 1 && <Trophy size={16} className="text-fire animate-pulse" />}
-                    {rank === 2 && <Medal size={16} className="text-secondary opacity-70" />}
-                    {rank === 3 && <Medal size={16} className="text-ember opacity-70" />}
-                    <span className={`text-[11px] ${isTop3 ? 'text-primary font-bold' : 'text-muted font-light'}`}>
-                      {String(rank).padStart(2, '0')}
-                    </span>
-                  </div>
-                </td>
-                <td className="py-5 px-8">
-                  <div className={`text-primary group-hover:text-fire transition-colors ${rank === 1 ? 'text-fire text-base tracking-widest' : ''}`}>
-                    {entry.teamName}
-                  </div>
-                  <div className="text-[9px] text-muted mt-1 uppercase tracking-wider">
-                    {entry.members && entry.members.length > 0 ? entry.members.join(' • ') : 'SQUAD UNKNOWN'}
-                  </div>
-                </td>
-                {showEvent && (
-                  <td className="py-5 px-8">
-                    <span className="px-3 py-1 bg-white/5 border border-white/10 text-[9px] text-secondary tracking-widest uppercase">
-                      {entry.eventName}
-                    </span>
-                  </td>
-                )}
-                <td className="py-5 px-8 text-secondary font-light text-[12px] uppercase tracking-wide opacity-60">
-                  {entry.college}
-                </td>
-                <td className="py-5 px-8 text-right">
-                  <span className={`font-bold text-lg ${rank === 1 ? 'text-fire' : 'text-primary'}`}>
-                    {entry.score}
-                  </span>
-                </td>
+    <div className="animate-fade-in">
+       {/* ACTIVE MISSION STATUS */}
+       <div className="flex items-center justify-between mb-8 border-l-2 border-fire pl-4">
+          <div>
+            <div className="font-mono text-[9px] text-fire uppercase tracking-widest mb-1">MISSION SUBJECT</div>
+            <div className="font-display text-4xl text-white uppercase">{rankings[0]?.event?.title}</div>
+          </div>
+          <div className="text-right">
+            <div className="font-mono text-[9px] text-secondary uppercase tracking-widest mb-1">UNITS TRACKED</div>
+            <div className="font-mono text-xl text-white font-bold">{rankings.length}</div>
+          </div>
+       </div>
+
+       {/* TABLE */}
+       <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-white/5 font-mono text-[10px] text-fire text-left uppercase tracking-widest">
+                <th className="p-4 border-r border-white/5 w-20 text-center">RANK</th>
+                <th className="p-4">IDENTIFIER / TEAM</th>
+                <th className="p-4 hidden md:table-cell">COLLEGE_REF</th>
+                <th className="p-4 text-right">SCORE_VAL</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {rankings.map((entry, index) => {
+                const isTop = index < 3;
+                return (
+                  <tr key={entry._id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
+                    <td className="p-4 border-r border-white/5 text-center">
+                       <span className={`font-display text-2xl ${isTop ? 'text-fire' : 'text-secondary'}`}>
+                         {String(index + 1).padStart(2, '0')}
+                       </span>
+                    </td>
+                    <td className="p-4">
+                       <div className="font-ui font-bold text-white uppercase tracking-wider">
+                         {entry.teamName || entry.leader?.name}
+                       </div>
+                       <div className="font-mono text-[9px] text-muted max-w-[240px] truncate uppercase mt-0.5">
+                         {entry.members?.map(m => typeof m === 'string' ? m : m.name).join(', ')}
+                       </div>
+                    </td>
+                    <td className="p-4 hidden md:table-cell">
+                       <div className="font-mono text-[10px] text-secondary uppercase tracking-wider">
+                         {entry.college || 'EXTERNAL_UNIT'}
+                       </div>
+                    </td>
+                    <td className="p-4 text-right">
+                       <div className="font-mono text-xl text-fire font-bold group-hover:animate-pulse">
+                         {String(entry.score).padStart(4, '0')}
+                       </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+       </div>
     </div>
   );
 }

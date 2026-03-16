@@ -83,6 +83,7 @@ app.use('/api/winners', winnersRoutes);
 app.use('/api/support', supportRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/upload', require('./routes/upload.routes'));
 
 // 404
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
