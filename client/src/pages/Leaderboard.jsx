@@ -11,11 +11,45 @@ export default function Leaderboard() {
   const { data: events = [], isLoading: eventsLoading } = useQuery({
     queryKey: ['leaderboard-events'],
     queryFn: async () => {
+      // Fetching all events to map them to the official names
       const res = await api.get('/leaderboard');
-      return res.data.leaderboard.map(item => ({
-        ...item.event,
-        entryCount: item.entries.length
-      }));
+      // Grouping provided names for consistency
+      const masterEvents = {
+        'Technical': [
+          "Poshan Lab – Redefining Nourishment", "Technical Poster Presentation", "Vikshit Bharat Tech Quiz",
+          "Bharat Bot Expo", "Bharat Tech Treasure Hunt", "Flying Control Racing – Drone Racing",
+          "RC Racing – Robo Racing", "Robo Maze", "Robo Soccer", "Prompt-a-thon – AI Prompt Engineering Challenge",
+          "Debug X – Coding Error Fixing", "Code the Rhythm – AI Music Creation", "Build for Bharat Hackathon",
+          "Forensic Files (Cyber Forensics)", "Pixel Quest", "Bharat Innovator", "The World Wired – Global Tech Quiz",
+          "Vigyan Darshan – Model Exhibition"
+        ],
+        'Creative & Innovation': [
+          "Tech Trail – Walking with Ideas of Innovation", "Digital Storytelling",
+          "Penetrix – Writing Thoughts for Tech Revolution", "Coded Humour – Tech Meme War", "Cinetech Cover",
+          "Marketing Mantra – Future of Marketing with Tech"
+        ],
+        'Fun': [
+          "Squid Dangal", "Escape Room", "E Ranbhoomi – E-Sports",
+          "Samvad – Group Discussion", "Bharat Bolta Hai – 1 Minute Speech", "Shark Tank IILM – Startup Pitching",
+          "X or Byte Ki Kahani – Mathematical Showdown", "Debate – Lex Tech"
+        ]
+      };
+      
+      const leaderboardData = res.data.leaderboard;
+      const flatList = [];
+      Object.entries(masterEvents).forEach(([category, names]) => {
+        names.forEach((name, index) => {
+          const matchingEvent = leaderboardData.find(item => item.event.title.includes(name.split(' – ')[0]));
+          flatList.push({
+            _id: matchingEvent?.event?._id || `temp-${category}-${index}`,
+            title: name,
+            category,
+            slug: matchingEvent?.event?.slug || name.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, ''),
+            entryCount: matchingEvent?.entries?.length || 0
+          });
+        });
+      });
+      return flatList;
     }
   });
 

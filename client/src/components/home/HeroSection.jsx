@@ -78,26 +78,26 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Main Title Group */}
-      <div className="relative mb-2">
-        {/* Fix 1 — TITLE SIZE (Increased) */}
+      <div className="relative z-10 w-full max-w-fit mb-4 overflow-visible">
         <h1 
-          className="font-display text-white drop-shadow-fire"
+          className="font-ignite text-white drop-shadow-fire"
           style={{
-            fontSize: 'clamp(120px, 18vw, 280px)',
-            letterSpacing: '-0.02em',
-            lineHeight: '0.88',
+            fontSize: 'clamp(64px, 14vw, 180px)',
+            letterSpacing: '0.02em',
+            lineHeight: '1.1',
+            fontWeight: 900,
+            textTransform: 'uppercase',
           }}
         >
           <ScrambleText text="IGNITE" delay={400} />
         </h1>
         
-        {/* Fix 1 — TECHFEST 2026 (Resized) */}
         <div 
-          className="font-display mt-[-10px] md:mt-[-25px]"
+          className="font-display -mt-2 md:-mt-6"
           style={{
             color: 'transparent',
             WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.2)',
-            fontSize: 'clamp(48px, 8vw, 120px)',
+            fontSize: 'clamp(32px, 7vw, 90px)',
             letterSpacing: '0.1em',
             lineHeight: '1',
           }}
@@ -135,9 +135,8 @@ export default function HeroSection() {
           marginBottom: '40px',
         }}
       >
-        35 competitions. ₹2,00,000 in prizes.<br />
-        Where India&apos;s next generation of
-        innovators compete.
+        30+ competitions. ₹2,15,500 in prizes.<br />
+        Innovate. Integrate. Ignite.
       </motion.p>
 
       {/* Countdown Timer */}
@@ -189,7 +188,7 @@ export default function HeroSection() {
           color: '#FFFFFF',
           lineHeight: 1,
         }}>
-          ₹2,00,000
+          ₹2,15,500
         </div>
         <div style={{
           fontFamily: "'IBM Plex Mono', monospace",

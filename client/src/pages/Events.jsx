@@ -54,7 +54,7 @@ export default function Events() {
             <ScrambleText text="ALL EVENTS" />
           </h1>
           <p className="font-mono text-secondary tracking-[3px] text-xs md:text-sm uppercase mb-8">
-            35 Competitions across 3 Categories
+            30+ Competitions across 3 Categories
           </p>
           <div className="flex flex-wrap gap-4 font-mono text-[10px] tracking-[2px]">
             <span className="px-3 py-1 bg-fire/10 text-fire border border-fire/20 uppercase">{stats.tech} Technical</span>

@@ -10,6 +10,7 @@ import { eventsService } from '@/services/events.service';
 import eventsFallback from '@/data/events';
 import useScrollReveal from '../hooks/useScrollReveal';
 import EventCard from '../components/ui/EventCard';
+import { Icons } from '../components/ui/EventIcons';
 
 export default function EventDetail() {
   const { slug } = useParams();
@@ -54,6 +55,8 @@ export default function EventDetail() {
   const displayRules = Array.isArray(event.rules) && event.rules.length > 0
     ? event.rules
     : (fallbackEvent?.rules || []);
+  
+  const EventIcon = Icons[event.icon] || Icons.Code;
 
   return (
     <PageTransition className="pb-24">
@@ -74,9 +77,14 @@ export default function EventDetail() {
             <span className="text-secondary">{event.category.toUpperCase()}</span>
           </nav>
 
-          <h1 className="font-display text-5xl md:text-8xl lg:text-9xl text-primary leading-none mb-8">
-            <ScrambleText text={event.title.toUpperCase()} />
-          </h1>
+          <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-secondary/5 border border-primary/20 rounded-xl flex items-center justify-center">
+              <EventIcon color="var(--primary)" />
+            </div>
+            <h1 className="font-display text-5xl md:text-8xl lg:text-9xl text-primary leading-none">
+              <ScrambleText text={event.title.toUpperCase()} />
+            </h1>
+          </div>
 
           <div className="flex flex-wrap items-center gap-6">
             <CategoryBadge category={event.category} size="lg" />

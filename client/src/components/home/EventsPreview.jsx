@@ -31,7 +31,7 @@ export default function EventsPreview() {
           <div className="w-24 h-1 bg-fire" />
         </div>
         <IgniteButton variant="ghost" to="/events" className="hidden md:flex">
-          VIEW ALL 35 EVENTS →
+          VIEW ALL 30+ EVENTS →
         </IgniteButton>
       </div>
 
@@ -49,7 +49,7 @@ export default function EventsPreview() {
 
       <div className="mt-12 flex justify-center md:hidden">
         <IgniteButton variant="ghost" to="/events">
-          VIEW ALL 35 EVENTS →
+          VIEW ALL 30+ EVENTS →
         </IgniteButton>
       </div>
     </section>

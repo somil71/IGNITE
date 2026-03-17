@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -19,7 +19,7 @@ export default function Footer() {
               IILM University, Greater Noida
             </p>
             <p className="font-mono text-[12px] text-secondary leading-relaxed mb-6">
-              Annual Techfest 2026 — 35 Events — ₹2,00,000+ Prize Pool
+              Annual Techfest 2026 — 30+ Events — ₹2,15,500+ Prize Pool
             </p>
             <a
               href="mailto:ignite.techfest@iilm.edu"
@@ -58,10 +58,8 @@ export default function Footer() {
             <div className="font-mono text-[10px] text-muted tracking-[3px] uppercase mb-4">Follow</div>
             <div className="flex gap-4">
               {[
-                { Icon: Instagram, href: '#' },
-                { Icon: Facebook, href: '#' },
-                { Icon: Twitter, href: '#' },
-                { Icon: Linkedin, href: '#' },
+                { Icon: Instagram, href: 'https://www.instagram.com/ignite_iilm' },
+                { Icon: Linkedin, href: 'https://www.linkedin.com/in/ignite-techfest-8544a12b9' },
               ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
@@ -76,8 +74,8 @@ export default function Footer() {
             </div>
             <div className="mt-6 p-4 border border-[var(--border-fire)] bg-[rgba(255,107,0,0.05)]">
               <div className="font-mono text-[10px] text-secondary tracking-[2px] uppercase mb-1">Prize Pool</div>
-              <div className="font-display text-2xl text-fire">₹2,00,000+</div>
-              <div className="font-mono text-[11px] text-secondary">+ GOODIES</div>
+              <div className="font-display text-2xl text-fire">₹2,15,500+</div>
+              <div className="font-mono text-11px text-secondary">+ GOODIES</div>
             </div>
           </div>
         </div>

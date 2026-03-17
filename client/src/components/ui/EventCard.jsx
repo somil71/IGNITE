@@ -2,17 +2,24 @@ import { Link } from 'react-router-dom';
 import { Users, DollarSign, ArrowRight } from 'lucide-react';
 import CategoryBadge from './CategoryBadge';
 import ScrambleText from './ScrambleText';
+import { Icons } from './EventIcons';
 
 export default function EventCard({ event }) {
-  const { title, slug, category, teamSize, registrationFee, description, feeType } = event;
+  const { title, slug, category, teamSize, registrationFee, description, feeType, icon } = event;
+  const EventIcon = Icons[icon] || Icons.Code;
 
   return (
-    <Link to={`/events/${slug}`} className="block ignite-card p-6 group cursor-none">
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <CategoryBadge category={category} />
-        <div className="flex items-center gap-1 text-[11px] font-mono text-muted">
-          <DollarSign size={11} />
-          {registrationFee === 0 ? 'FREE' : `₹${registrationFee} ${feeType === 'per_team' ? '/ Team' : '/ Person'}`}
+    <Link to={`/events/${slug}`} className="block ignite-card p-6 group cursor-none relative h-full">
+      <div className="flex items-start justify-between gap-4 mb-6">
+        <div className="p-3 bg-secondary/5 border border-primary/20 rounded-lg group-hover:border-fire/50 group-hover:bg-fire/5 transition-all">
+          <EventIcon className="text-primary group-hover:text-fire transition-colors" />
+        </div>
+        <div className="flex flex-col items-end gap-2">
+          <CategoryBadge category={category} />
+          <div className="flex items-center gap-1 text-[11px] font-mono text-muted">
+            <DollarSign size={11} />
+            {registrationFee === 0 ? 'FREE' : `₹${registrationFee} ${feeType === 'per_team' ? '/ Team' : '/ Person'}`}
+          </div>
         </div>
       </div>
 

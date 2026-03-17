@@ -7,10 +7,12 @@ export default function Sponsors() {
   const reveal2 = useScrollReveal();
 
   const tiers = [
-    { title: 'TITLE SPONSOR', count: 1, height: 'h-64', color: 'border-fire' },
-    { title: 'GOLD SPONSORS', count: 3, height: 'h-48', color: 'border-ember' },
-    { title: 'SILVER SPONSORS', count: 4, height: 'h-40', color: 'border-muted' },
-    { title: 'COMMUNITY PARTNERS', count: 5, height: 'h-32', color: 'border-muted' },
+    { title: 'TITLE SPONSOR', count: 1, fullWidth: true, height: 'h-64', color: 'border-fire' },
+    { title: 'REGISTRATION PARTNER', count: 2, height: 'h-48', color: 'border-ember' },
+    { title: 'MARKETING PARTNER', count: 2, height: 'h-48', color: 'border-ember' },
+    { title: 'MERCHANDISE PARTNER', count: 2, height: 'h-48', color: 'border-ember' },
+    { title: 'TECHNICAL PARTNER', count: 2, height: 'h-48', color: 'border-ember' },
+    { title: 'DIGITAL MEDIA PARTNER', count: 2, height: 'h-48', color: 'border-ember' },
   ];
 
   return (
@@ -35,10 +37,10 @@ export default function Sponsors() {
                 {[...Array(tier.count)].map((_, i) => (
                   <div 
                     key={i} 
-                    className={`flex-1 min-w-[200px] ${tier.height} border-2 border-dashed ${tier.color} bg-surface/30 flex flex-col items-center justify-center opacity-40 group hover:opacity-100 transition-opacity`}
+                    className={`${tier.fullWidth ? 'w-full' : 'flex-1 min-w-[300px]'} ${tier.height} border-2 border-dashed ${tier.color} bg-surface/30 flex flex-col items-center justify-center opacity-40 group hover:opacity-100 transition-all duration-300`}
                   >
-                    <div className="font-display text-xl text-muted group-hover:text-primary transition-colors">LOGO COMING SOON</div>
-                    <div className="font-mono text-[9px] text-muted tracking-[2px] uppercase mt-2">{tier.title.split(' ')[0]} PARTNER</div>
+                    <div className="font-display text-xl text-muted group-hover:text-primary transition-colors uppercase">LOGO COMING SOON</div>
+                    <div className="font-mono text-[9px] text-muted tracking-[2px] uppercase mt-2">{tier.title}</div>
                   </div>
                 ))}
               </div>

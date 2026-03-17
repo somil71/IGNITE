@@ -1,7 +1,7 @@
 import { 
   Megaphone, ClipboardList, Truck, Share2, 
   ShieldCheck, Palette, Sparkles, Cpu, 
-  Lightbulb, Camera, ChevronRight 
+  Lightbulb, Camera 
 } from 'lucide-react';
 
 const ICON_MAP = {
@@ -10,7 +10,7 @@ const ICON_MAP = {
   Lightbulb, Camera
 };
 
-export default function TeamSection({ name, icon, subtitle, color = "#FF5500" }) {
+export default function TeamSection({ name, icon, subtitle, color = "#FF5500", members = [] }) {
   const IconComponent = ICON_MAP[icon] || Share2;
 
   // Add opacity to hex color for background and border
@@ -50,41 +50,60 @@ export default function TeamSection({ name, icon, subtitle, color = "#FF5500" })
         <IconComponent size={20} style={{ color: color }} />
       </div>
 
-      {/* Team name text */}
+      {/* Team info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <h4 style={{
-          fontFamily: "'Rajdhani', sans-serif",
-          fontWeight: 700,
-          fontSize: '15px',
-          color: '#F0F0F5',
-          margin: 0,
-          textTransform: 'uppercase',
-          letterSpacing: '0.02em',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap'
-        }}>
-          {name}
-        </h4>
-        {subtitle && (
-          <p style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '9px',
-            color: color,
-            letterSpacing: '0.1em',
-            margin: '2px 0 0 0',
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+          <h4 style={{
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: 700,
+            fontSize: '15px',
+            color: '#F0F0F5',
+            margin: 0,
             textTransform: 'uppercase',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
+            letterSpacing: '0.02em',
           }}>
-            {subtitle}
-          </p>
-        )}
-      </div>
+            {name}
+          </h4>
+          {subtitle && (
+            <span style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '8px',
+              color: color,
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              background: getRGBA(color, 0.1),
+              padding: '2px 6px',
+              border: `1px solid ${getRGBA(color, 0.2)}`
+            }}>
+              {subtitle}
+            </span>
+          )}
+        </div>
 
-      {/* Right chevron */}
-      <ChevronRight size={14} style={{ color: color, opacity: 0.25 }} />
+        {/* Members List */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(2, 1fr)', 
+          gap: '8px',
+          marginTop: '12px',
+          borderTop: '1px solid rgba(255,255,255,0.05)',
+          paddingTop: '12px'
+        }}>
+          {members?.map((member, i) => (
+            <div key={i} style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '11px',
+              color: 'rgba(255,255,255,0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <span style={{ width: '4px', height: '4px', background: color, borderRadius: '50%' }} />
+              {member}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

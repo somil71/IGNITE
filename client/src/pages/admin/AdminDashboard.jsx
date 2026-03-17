@@ -31,7 +31,7 @@ export default function AdminDashboard() {
     { label: 'REGISTRATIONS', value: data?.totalRegistrations || 0, icon: <ClipboardCheck />, color: 'fire', delay: 100 },
     { label: 'CONFIRMED SLOTS', value: data?.confirmedRegistrations || 0, icon: <Zap />, color: 'fire', delay: 200 },
     { label: 'PENDING PAYMENTS', value: data?.pendingPayments || 0, icon: <CreditCard />, color: 'ember', delay: 300 },
-    { label: 'ACTIVE EVENTS', value: data?.activeEvents || 35, icon: <Calendar />, color: 'cyan', delay: 400 },
+    { label: 'ACTIVE EVENTS', value: data?.activeEvents || 32, icon: <Calendar />, color: 'cyan', delay: 400 },
     { label: 'SUPPORT TICKETS', value: 0, icon: <MessageSquare />, color: 'ember', delay: 500 },
   ];
 

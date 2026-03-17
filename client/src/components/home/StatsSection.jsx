@@ -13,16 +13,17 @@ function Counter({ value, suffix = '' }) {
           hasStarted.current = true;
           let start = 0;
           const end = parseInt(value);
-          
-          const timer = setInterval(() => {
-            start += Math.ceil(end / 100);
-            if (start >= end) {
-              setCount(end);
-              clearInterval(timer);
-            } else {
-              setCount(start);
-            }
-          }, 30);
+            const stepTime = 30;
+            
+            const timer = setInterval(() => {
+              start += Math.ceil(end / 100);
+              if (start >= end) {
+                setCount(end);
+                clearInterval(timer);
+              } else {
+                setCount(start);
+              }
+            }, stepTime);
         }
       },
       { threshold: 0.5 }
@@ -48,7 +49,7 @@ export default function StatsSection() {
     <section className="py-24 px-6 relative z-10 bg-surface/50 border-y border-[var(--border-subtle)]">
       <div ref={revealRef} className="reveal-stagger max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
         <div>
-          <Counter value="35" />
+          <Counter value="30" suffix="+" />
           <div className="font-ui text-secondary text-center tracking-[3px] text-xs uppercase">Events</div>
         </div>
         <div>

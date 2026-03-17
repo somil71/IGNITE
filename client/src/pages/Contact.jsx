@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Mail, MapPin, Users, MessageSquare, Send, Loader2, 
+  Mail, MapPin, MessageSquare, Send, Loader2, 
   CircleCheck, ChevronRight 
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -113,19 +113,31 @@ export default function Contact() {
               <ChevronRight size={14} className="text-white/20 group-hover:text-fire group-hover:translate-x-[3px] transition-all" />
             </a>
 
-            {/* CARD 3 — Coordinators */}
-            <Link to="/team" className="flex items-center gap-[16px] p-[18px_20px] bg-card border border-white/5 hover:border-fire/40 hover:bg-elevated hover:translate-x-[6px] transition-all duration-250 group">
-              <div className="w-[46px] h-[46px] flex-shrink-0 bg-fire/10 border border-fire/25 flex items-center justify-center group-hover:bg-fire/20 transition-all">
-                <Users size={20} className="text-fire" />
+            {/* CARD 3 — Primary Organizers */}
+            <div className="p-[18px_20px] bg-card border border-white/5 hover:border-fire/40 transition-all duration-250 group">
+              <div className="font-ui text-[10px] text-fire font-bold uppercase tracking-[0.25em] mb-4">PRIMARY ORGANIZERS</div>
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="font-mono text-[13px] text-white">Praneet Kumar</div>
+                  <a href="tel:9546543490" className="font-mono text-[11px] text-fire hover:text-white transition-colors">9546543490</a>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="font-mono text-[13px] text-white">Ayush Arnav</div>
+                </div>
               </div>
-              <div className="flex-1">
-                <div className="font-ui text-[10px] text-fire font-bold uppercase tracking-[0.25em] mb-1">COORDINATOR CONTACTS</div>
-                <div className="font-mono text-[13px] text-white">View event coordinators →</div>
-              </div>
-              <ChevronRight size={14} className="text-white/20 group-hover:text-fire group-hover:translate-x-[3px] transition-all" />
-            </Link>
+            </div>
 
-            {/* CARD 4 — Live Support */}
+            {/* CARD 4 — Supporting Organizers */}
+            <div className="p-[18px_20px] bg-card border border-white/5 hover:border-fire/40 transition-all duration-250 group">
+              <div className="font-ui text-[10px] text-fire font-bold uppercase tracking-[0.25em] mb-4">STUDENT ORGANIZERS</div>
+              <div className="grid grid-cols-1 gap-3">
+                {['Anamika Pandey', 'Piyush Kumar', 'Inzamam ul Haque Ansari'].map(name => (
+                  <div key={name} className="font-mono text-[13px] text-white/70">{name}</div>
+                ))}
+              </div>
+            </div>
+
+            {/* CARD 5 — Live Support */}
             <Link to="/support" className="flex items-center gap-[16px] p-[18px_20px] bg-card border border-white/5 hover:border-cyan/40 hover:bg-elevated hover:translate-x-[6px] transition-all duration-250 group">
               <div className="w-[46px] h-[46px] flex-shrink-0 bg-cyan/10 border border-cyan/25 flex items-center justify-center group-hover:bg-cyan/20 transition-all">
                 <MessageSquare size={20} className="text-cyan" />
@@ -136,7 +148,6 @@ export default function Contact() {
                    <span className="w-2 h-2 rounded-full bg-[#00FF94] animate-[dotPulse_2s_infinite] mr-1.5" />
                    <div className="font-mono text-[13px] text-white">Available during fest hours</div>
                 </div>
-                <div className="font-mono text-[11px] text-white/50">Chat with our team</div>
               </div>
               <ChevronRight size={14} className="text-white/20 group-hover:text-cyan group-hover:translate-x-[3px] transition-all" />
             </Link>

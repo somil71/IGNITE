@@ -3,6 +3,7 @@ import HeroSection from '../components/home/HeroSection';
 import PrizePoolBanner from '../components/ui/PrizePoolBanner';
 import StatsSection from '../components/home/StatsSection';
 import EventsPreview from '../components/home/EventsPreview';
+import AboutSections from '../components/home/AboutSections';
 import SponsorsStrip from '../components/home/SponsorsStrip';
 import IgniteButton from '../components/ui/IgniteButton';
 import ScrambleText from '../components/ui/ScrambleText';
@@ -29,6 +30,9 @@ export default function Home() {
       {/* 4. EVENTS PREVIEW */}
       <EventsPreview />
 
+      {/* 4.5 ABOUT SECTIONS */}
+      <AboutSections />
+
       {/* 5. SPONSORS */}
       <SponsorsStrip />
 
@@ -41,7 +45,7 @@ export default function Home() {
             <ScrambleText text="READY TO COMPETE?" trigger="scroll" />
           </h2>
           <p className="font-mono text-secondary tracking-[2px] mb-12 uppercase text-sm md:text-base">
-            35 events. One platform. Your moment.
+            Innovate. Integrate. Ignite.
           </p>
           <IgniteButton variant="primary" size="lg" to="/register">
             REGISTER FOR IGNITE 2026

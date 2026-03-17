@@ -21,16 +21,16 @@ const studentOrganisers = [
 ];
 
 const organisingTeams = [
-  { name: "PR Team", icon: "Megaphone", color: "#FF5500", subtitle: null },
-  { name: "Registration Team", icon: "ClipboardList", color: "#FF7A00", subtitle: null },
-  { name: "Logistics Team", icon: "Truck", color: "#FF5500", subtitle: null },
-  { name: "Social Media Team", icon: "Share2", color: "#00D4FF", subtitle: null },
-  { name: "Discipline Team", icon: "ShieldCheck", color: "#FF5500", subtitle: null },
-  { name: "Designing Team", icon: "Palette", color: "#FF7A00", subtitle: null },
-  { name: "Decoration Team", icon: "Sparkles", color: "#FF5500", subtitle: null },
-  { name: "Technical Team", icon: "Cpu", color: "#00D4FF", subtitle: "GDG IILM" },
-  { name: "Creative Team", icon: "Lightbulb", color: "#FF7A00", subtitle: "The Srijan Society" },
-  { name: "Digital Media Team", icon: "Camera", color: "#00FF94", subtitle: "CampusLens IILM" }
+  { name: "PR Team", icon: "Megaphone", color: "#FF5500", members: ["Member Name", "Member Name"] },
+  { name: "Registration Team", icon: "ClipboardList", color: "#FF7A00", members: ["Member Name", "Member Name", "Member Name", "Member Name", "Member Name", "Member Name"] },
+  { name: "Logistics Team", icon: "Truck", color: "#FF5500", members: ["Member Name", "Member Name"] },
+  { name: "Social Media Team", icon: "Share2", color: "#00D4FF", members: ["Member Name", "Member Name"] },
+  { name: "Discipline Team", icon: "ShieldCheck", color: "#FF5500", members: ["Member Name", "Member Name"] },
+  { name: "Designing Team", icon: "Palette", color: "#FF7A00", members: ["Member Name", "Member Name"] },
+  { name: "Decoration Team", icon: "Sparkles", color: "#FF5500", members: ["Member Name", "Member Name"] },
+  { name: "Technical Team", icon: "Cpu", color: "#00D4FF", subtitle: "GDG IILM", members: ["Member Name", "Member Name"] },
+  { name: "Creative Team", icon: "Lightbulb", color: "#FF7A00", subtitle: "The Srijan Society", members: ["Member Name", "Member Name"] },
+  { name: "Digital Media Team", icon: "Camera", color: "#00FF94", subtitle: "CampusLens IILM", members: ["Member Name", "Member Name"] }
 ];
 
 export default function Team() {

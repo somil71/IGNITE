@@ -11,7 +11,7 @@ export default function PrizePoolBanner() {
       ([entry]) => {
         if (entry.isIntersecting && !hasStarted.current) {
           hasStarted.current = true;
-          const target = 200000;
+          const target = 215500;
           const duration = 2000;
           const steps = 60;
           let step = 0;
@@ -47,7 +47,7 @@ export default function PrizePoolBanner() {
           ₹{count.toLocaleString('en-IN')}
         </div>
         <div className="font-display text-xl sm:text-2xl text-ember mt-1">+ GOODIES</div>
-        <div className="font-mono text-[11px] text-muted tracking-[3px] mt-3">ACROSS 35 EVENTS</div>
+        <div className="font-mono text-[11px] text-muted tracking-[3px] mt-3">ACROSS 30+ EVENTS</div>
       </div>
     </div>
   );

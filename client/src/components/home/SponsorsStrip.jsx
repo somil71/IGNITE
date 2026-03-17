@@ -1,12 +1,11 @@
 export default function SponsorsStrip() {
   const sponsors = [
     'TITLE SPONSOR',
-    'GOLD PARTNER',
-    'GOLD PARTNER',
-    'SILVER PARTNER',
-    'SILVER PARTNER',
+    'REGISTRATION PARTNER',
+    'MARKETING PARTNER',
+    'MERCHANDISE PARTNER',
     'TECHNICAL PARTNER',
-    'MEDIA PARTNER',
+    'DIGITAL MEDIA PARTNER',
   ];
 
   return (
